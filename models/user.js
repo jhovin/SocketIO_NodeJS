@@ -35,4 +35,21 @@ module.exports = {
              }
          });
      },
+     update: function(data,callback){
+        user_model.findOne({_id: data._id}, function(err,item){
+            item.first_name = data.first_name;
+            item.last_name = data.last_name;
+            item.timezone = data.timezone;
+            item.locale = data.locale;
+            item.profile_pic = data.profile_pic;
+            item.save();
+            callback(item);
+        });
+    },
+    delete: function(_id,callback){
+        user_model.findOne({_id: _id}, function(err,post){
+            post.remove();
+            callback(_id);
+        });
+    }
 };
